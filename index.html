@@ -322,6 +322,250 @@
         </div>
     </section>
 
+
+<!-- <div id="ww_4631a43184441" v='1.3' loc='id' a='{"t":"ticker","lang":"it","sl_lpl":1,"ids":["wl7998"],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>Altre previsioni: <a href="https://oneweather.org/it/rome/10_days/" id="ww_4631a43184441_u" target="_blank">Tempo roma 10 giorni</a></div><script async src="https://app3.weatherwidget.org/js/?id=ww_4631a43184441"></script> -->
+
+
+
+
+
+
+
+<!-- inzio meteo -->
+
+
+
+    <!-- Tailwind caricato tramite script per utilità di layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome per le icone meteo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Scoping per evitare conflitti con il sito principale */
+        #sb-weather-widget {
+            all: initial; /* Reset parziale per isolare il widget */
+            display: block;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: white;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        #sb-weather-widget * {
+            box-sizing: border-box;
+        }
+
+        /* Container principale statico e squadrato */
+        .sb-weather-container {
+            position: relative;
+            background: #1e293b; /* Slate 800 */
+            border-radius: 0; 
+            overflow: hidden;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sb-content {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Animazione fluttuante per l'icona principale */
+        .sb-main-weather-icon {
+            animation: sb-float-icon 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
+        }
+
+        @keyframes sb-float-icon {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        /* Scroll orizzontale ottimizzato per smartphone */
+        .sb-forecast-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 5px;
+        }
+        
+        .sb-forecast-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .sb-forecast-scroll::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 10px;
+        }
+
+        .sb-forecast-grid {
+            display: flex;
+            gap: 10px;
+            min-width: 600px;
+            margin-top: 5px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .sb-forecast-grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                min-width: auto;
+            }
+        }
+
+        .sb-forecast-day {
+            flex: 1;
+            text-align: center;
+            padding: 12px 8px;
+            background: rgba(255,255,255,0.03);
+            transition: background 0.3s ease;
+        }
+
+        .sb-temp-gradient {
+            background: linear-gradient(to bottom, #fff, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 300;
+        }
+
+        .sb-details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Wrapper unico per isolare lo stile -->
+    <div id="sb-weather-widget">
+        <div class="sb-weather-container">
+            <div class="sb-content">
+                
+                <!-- Header: Flessibile per Mobile/Desktop -->
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+                    
+                    <!-- Info Località -->
+                    <div class="text-center md:text-left">
+                        <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-white m-0">Sperlonga</h1>
+                        <p class="text-sky-400 font-medium flex items-center justify-center md:justify-start gap-2 text-sm mt-1">
+                            <i class="fas fa-location-dot"></i> Latina, Lazio
+                        </p>
+                        <div id="sb-current-date" class="text-[10px] md:text-xs opacity-60 mt-1 uppercase tracking-widest text-white"></div>
+                    </div>
+
+                    <!-- Temperatura e Icona Principale -->
+                    <div class="flex items-center justify-center gap-6 md:gap-8">
+                        <div class="text-right">
+                            <div class="text-5xl md:text-6xl sb-temp-gradient leading-none">19°</div>
+                            <p class="text-[10px] md:text-xs font-semibold opacity-80 uppercase mt-2 text-white">Poco Nuvoloso</p>
+                        </div>
+                        <i class="fas fa-cloud-sun-rain text-5xl md:text-6xl text-sky-300 sb-main-weather-icon"></i>
+                    </div>
+
+                    <!-- Box Dettagli per Bikers -->
+                    <div class="sb-details-grid">
+                        <div class="text-center">
+                            <i class="fas fa-wind text-sky-400 text-xs mb-1"></i>
+                            <p class="text-[9px] opacity-60 uppercase text-white">Vento</p>
+                            <p class="text-xs font-bold text-white">14 km/h</p>
+                        </div>
+                        <div class="text-center border-x border-white/10">
+                            <i class="fas fa-droplet text-sky-400 text-xs mb-1"></i>
+                            <p class="text-[9px] opacity-60 uppercase text-white">Umidità</p>
+                            <p class="text-xs font-bold text-white">72%</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-sun text-yellow-400 text-xs mb-1"></i>
+                            <p class="text-[9px] opacity-60 uppercase text-white">Visibilità</p>
+                            <p class="text-xs font-bold text-white">Ottima</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer: Previsioni 7 giorni -->
+                <div>
+                    <h3 class="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-3 ml-1 text-white">Previsioni 7 Giorni</h3>
+                    <div class="sb-forecast-scroll">
+                        <div class="sb-forecast-grid" id="sb-forecast-render">
+                            <!-- Popolato da JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const giorni = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+            const icone = ['fa-sun', 'fa-cloud-sun', 'fa-cloud', 'fa-cloud-showers-heavy', 'fa-sun', 'fa-cloud-meatball', 'fa-bolt'];
+            const tempMax = [21, 20, 18, 17, 19, 22, 23];
+            const tempMin = [14, 13, 11, 10, 12, 14, 15];
+
+            function initWeather() {
+                const container = document.getElementById('sb-forecast-render');
+                const dateDisplay = document.getElementById('sb-current-date');
+                if (!container || !dateDisplay) return;
+
+                const oggi = new Date();
+                
+                // Data odierna in italiano
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateDisplay.innerText = oggi.toLocaleDateString('it-IT', options);
+
+                let html = '';
+                for (let i = 0; i < 7; i++) {
+                    const dataFutura = new Date();
+                    dataFutura.setDate(oggi.getDate() + i);
+                    
+                    const giornoSettimana = i === 0 ? 'Oggi' : giorni[dataFutura.getDay()];
+                    const iconaMeteo = icone[i % icone.length];
+
+                    html += `
+                        <div class="sb-forecast-day">
+                            <div class="text-[9px] uppercase font-bold opacity-50 mb-2 text-white">${giornoSettimana}</div>
+                            <i class="fas ${iconaMeteo} text-lg my-2 text-sky-300"></i>
+                            <div class="text-xs md:text-sm font-bold text-white">${tempMax[i]}°</div>
+                            <div class="text-[9px] opacity-40 text-white">${tempMin[i]}°</div>
+                        </div>
+                    `;
+                }
+                container.innerHTML = html;
+            }
+
+            // Avvio al caricamento
+            if (document.readyState === 'complete') {
+                initWeather();
+            } else {
+                window.addEventListener('load', initWeather);
+            }
+        })();
+    </script>
+
+
+
+
+
+<!-- fine meteo -->
+
+
+
+
+
+
+
+
+
+
     <!-- Programma Ufficiale -->
     <section id="programma" class="py-24 bg-black relative">
         <div class="container mx-auto px-6">
