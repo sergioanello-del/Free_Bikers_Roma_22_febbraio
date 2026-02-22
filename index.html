@@ -280,6 +280,99 @@
             color: black;
         }
     </style>
+
+
+
+
+<!-- inzio bottone evento concluso -->
+
+
+
+
+    <style>
+        /* Contenitore per il bottone */
+        .container-bottone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        
+        }
+
+        /* Stile del Bottone (Dimensioni Ridotte) */
+        .btn-evento-concluso {
+            display: inline-block;
+            padding: 12px 25px; /* Padding ridotto */
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 1.2rem; /* Font più piccolo */
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(45deg, #ff0000, #990000);
+            border: 3px solid #ffffff; /* Bordo più sottile */
+            border-radius: 20px; /* Arrotondamento proporzionato */
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+            
+            /* Animazione pulsante */
+            animation: pulsazione 1.5s infinite;
+        }
+
+        /* Effetto Hover */
+        .btn-evento-concluso:hover {
+            transform: scale(1.05);
+            color: #ffffff;
+            text-decoration: none;
+            background: linear-gradient(45deg, #b30000, #ff0000);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        /* Animazione */
+        @keyframes pulsazione {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+                background-color: #ff1a1a;
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+            }
+        }
+
+        /* Responsive per cellulari molto piccoli */
+        @media (max-width: 480px) {
+            .btn-evento-concluso {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+
+        /* Sezione ancora per il test */
+        .sezione-fotogallery {
+            height: 600px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            border-top: 3px dashed #333;
+        }
+    </style>
+
+
+
+
+
+
+<!-- fine  bottone evento concluso  -->
 </head>
 <body>
 
@@ -306,10 +399,19 @@
         <div class="relative z-10 container mx-auto px-4 text-center">
             <div data-aos="fade-down">
                 <h2 class="text-amber-500 font-bold tracking-[0.3em] uppercase mb-4">Domenica 22 febbraio</h2>
+
+
                 <h1 class="text-6xl md:text-9xl font-black mb-8 text-white italic uppercase tracking-tighter leading-none">
                     Sperlonga<br>Villa di Tiberio<br><span class="text-amber-500">Verso la storia</span>
                 </h1>
             </div>
+
+			<!-- BOTTONE -->
+			<div class="container-bottone">
+				<a href="#fotogallery" class="btn-evento-concluso">
+					EVENTO CONCLUSO<br>GUARDA FOTO E VIDEO
+				</a>
+			</div>
             <p class="text-lg md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto font-light" data-aos="fade-up">
               L'Antro di Tiberio, Odissea di Marmo e Il "Lacus" centrale!
             </p>
@@ -627,7 +729,7 @@
 (function() {
     const config = {
         basePath: 'https://sergioanello-del.github.io/Free_Bikers_Roma_22_febbraio/Gallery/',
-        images: ["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg","15.jpeg","16.jpeg","17.jpeg"],
+        images: ["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg","15.jpeg","16.jpeg","17.jpeg","18.jpeg","19.jpeg","20.jpeg","21.jpeg","22.jpeg","23.jpeg","24.jpeg","25.jpeg","26.jpeg","27.jpeg","28.jpeg","29.jpeg","30.jpeg","31.jpeg","32.jpeg","33.jpeg"],
         speed: 0.6 // Velocità rallentata (era 1.2)
     };
 
@@ -951,12 +1053,14 @@
              data-video-url="https://sergioanello-del.github.io/Free_Bikers_Roma_22_febbraio/Video/Video01.mp4" 
              data-width="300" 
              data-height="600">
-            <img src="https://sergioanello-del.github.io/Free_Bikers_Roma_1_febbraio/VideoSermoneda/TN-video-01.jpg" alt="Video 1" class="fb-video-thumb">
+            <img src="https://sergioanello-del.github.io/Free_Bikers_Roma_22_febbraio/Video/TN-video-01.png" alt="Video 1" class="fb-video-thumb">
             <div class="fb-play-overlay">
                 <div class="fb-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="fb-video-info" style="position:absolute; bottom:10px; left:15px; color:#fff; font-weight:bold; text-shadow:1px 1px 3px #000;">On the Road</div>
         </div>
+
+
 <!-- 
         <div class="fb-video-item" 
              data-video-type="html5" 
@@ -1062,10 +1166,10 @@
 
 
 
-
-
+<div style="background-color:#000000;">
+<center>
     <!-- Programma Ufficiale -->
-    <section id="programma" class="py-24 bg-black relative">
+    <section id="programma" class="py-24 bg-black relative" style="width:70%">
         <div class="container mx-auto px-6">
             <div class="text-center mb-20" data-aos="fade-up">
                 <h3 class="text-amber-500 font-bold uppercase tracking-[0.4em] mb-2">Roadmap</h3>
@@ -1199,6 +1303,10 @@
             </div>
         </div>
     </section>
+</center>
+</div>
+
+
 
     <!-- Storia & Leggenda -->
     <section id="storia" class="py-24 bg-white/5 overflow-hidden" style="padding-bottom:0px;">
