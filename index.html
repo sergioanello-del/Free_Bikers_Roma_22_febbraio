@@ -330,181 +330,6 @@
 
 
 
-
-
-<!-- inzio meteo -->
-
-
-
-    <!-- Tailwind caricato tramite script per utilità di layout -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome per le icone meteo -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* CSS Scoping per evitare conflitti con il sito principale */
-        #sb-weather-widget {
-            all: initial; /* Reset parziale per isolare il widget */
-            display: block;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: white;
-            margin: 10px 0;
-            width: 100%;
-        }
-
-        #sb-weather-widget * {
-            box-sizing: border-box;
-        }
-
-        /* Container principale statico e squadrato */
-        .sb-weather-container {
-            position: relative;
-            background: #1e293b; /* Slate 800 */
-            border-radius: 0; 
-            overflow: hidden;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sb-content {
-            position: relative;
-            z-index: 10;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Animazione fluttuante per l'icona principale */
-        .sb-main-weather-icon {
-            animation: sb-float-icon 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
-        }
-
-        @keyframes sb-float-icon {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
-        }
-
-        /* Scroll orizzontale ottimizzato per smartphone */
-        .sb-forecast-scroll {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 5px;
-        }
-        
-        .sb-forecast-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-        .sb-forecast-scroll::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.3);
-            border-radius: 10px;
-        }
-
-        .sb-forecast-grid {
-            display: flex;
-            gap: 10px;
-            min-width: 600px;
-            margin-top: 5px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .sb-forecast-grid {
-                display: grid;
-                grid-template-columns: repeat(7, 1fr);
-                min-width: auto;
-            }
-        }
-
-        .sb-forecast-day {
-            flex: 1;
-            text-align: center;
-            padding: 12px 8px;
-            background: rgba(255,255,255,0.03);
-            transition: background 0.3s ease;
-        }
-
-        .sb-temp-gradient {
-            background: linear-gradient(to bottom, #fff, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 300;
-        }
-
-        .sb-details-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            background: rgba(0,0,0,0.2);
-            padding: 1rem;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Wrapper unico per isolare lo stile -->
-    <div id="sb-weather-widget">
-        <div class="sb-weather-container">
-            <div class="sb-content">
-                
-                <!-- Header: Flessibile per Mobile/Desktop -->
-                <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
-                    
-                    <!-- Info Località -->
-                    <div class="text-center md:text-left">
-                        <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-white m-0">Sperlonga</h1>
-                        <p class="text-sky-400 font-medium flex items-center justify-center md:justify-start gap-2 text-sm mt-1">
-                            <i class="fas fa-location-dot"></i> Latina, Lazio
-                        </p>
-                        <div id="sb-current-date" class="text-[10px] md:text-xs opacity-60 mt-1 uppercase tracking-widest text-white"></div>
-                    </div>
-
-                    <!-- Temperatura e Icona Principale -->
-                    <div class="flex items-center justify-center gap-6 md:gap-8">
-                        <div class="text-right">
-                            <div class="text-5xl md:text-6xl sb-temp-gradient leading-none">19°</div>
-                            <p class="text-[10px] md:text-xs font-semibold opacity-80 uppercase mt-2 text-white">Poco Nuvoloso</p>
-                        </div>
-                        <i class="fas fa-cloud-sun-rain text-5xl md:text-6xl text-sky-300 sb-main-weather-icon"></i>
-                    </div>
-
-                    <!-- Box Dettagli per Bikers -->
-                    <div class="sb-details-grid">
-                        <div class="text-center">
-                            <i class="fas fa-wind text-sky-400 text-xs mb-1"></i>
-                            <p class="text-[9px] opacity-60 uppercase text-white">Vento</p>
-                            <p class="text-xs font-bold text-white">14 km/h</p>
-                        </div>
-                        <div class="text-center border-x border-white/10">
-                            <i class="fas fa-droplet text-sky-400 text-xs mb-1"></i>
-                            <p class="text-[9px] opacity-60 uppercase text-white">Umidità</p>
-                            <p class="text-xs font-bold text-white">72%</p>
-                        </div>
-                        <div class="text-center">
-                            <i class="fas fa-sun text-yellow-400 text-xs mb-1"></i>
-                            <p class="text-[9px] opacity-60 uppercase text-white">Visibilità</p>
-                            <p class="text-xs font-bold text-white">Ottima</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer: Previsioni 7 giorni -->
-                <div>
-                    <h3 class="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-3 ml-1 text-white">Previsioni 7 Giorni</h3>
-                    <div class="sb-forecast-scroll">
-                        <div class="sb-forecast-grid" id="sb-forecast-render">
-                            <!-- Popolato da JS -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         (function() {
             const giorni = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
@@ -556,7 +381,679 @@
 
 
 
-<!-- fine meteo -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- inizio photogallery -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    :root {
+        --fbr-height: 250px;
+        --fbr-accent: #ff4500;
+        --fbr-accent-glow: rgba(255, 69, 0, 0.8);
+        --fbr-bg: #0a0a0a;
+        --fbr-card-bg: #1a1a1a;
+        --fbr-overlay-bg: rgba(0, 0, 0, 0.98);
+        --fbr-transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    /* Ottimizzazione contenitore principale */
+    #fbr-gallery-container {
+        width: 100%;
+        height: var(--fbr-height);
+        background-color: var(--fbr-bg);
+        background-image: radial-gradient(circle at 2px 2px, #222 1px, transparent 0);
+        background-size: 24px 24px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        border-top: 3px solid #111;
+        border-bottom: 3px solid #111;
+        cursor: grab;
+        user-select: none;
+        touch-action: pan-y;
+    }
+
+    #fbr-gallery-container:active { cursor: grabbing; }
+
+    /* Sfumature laterali dinamiche */
+    #fbr-gallery-container::before, #fbr-gallery-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 15%;
+        max-width: 100px;
+        height: 100%;
+        z-index: 10;
+        pointer-events: none;
+    }
+    #fbr-gallery-container::before { left: 0; background: linear-gradient(to right, var(--fbr-bg), transparent); }
+    #fbr-gallery-container::after { right: 0; background: linear-gradient(to left, var(--fbr-bg), transparent); }
+
+    .fbr-track {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+        padding: 10px 0;
+    }
+
+    /* --- ITEM DESIGN & HOVER EFFECTS --- */
+    .fbr-item {
+        height: calc(var(--fbr-height) - 40px);
+        width: 280px;
+        flex-shrink: 0;
+        margin: 0 10px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 2px solid #333;
+        background: var(--fbr-card-bg);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .fbr-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.9);
+        transition: transform 0.6s ease, filter 0.6s ease;
+    }
+
+    /* Icona Lente e Overlay Scurito */
+    .fbr-zoom-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+        color: white;
+        font-size: 2.5rem;
+        opacity: 0;
+        z-index: 5;
+        transition: all 0.4s ease;
+        text-shadow: 0 0 15px var(--fbr-accent-glow);
+    }
+
+    .fbr-item::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 2;
+    }
+
+    /* Hover State (Solo desktop) */
+    @media (hover: hover) {
+        .fbr-item:hover {
+            transform: scale(1.1) translateY(-5px);
+            border-color: var(--fbr-accent);
+            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.4);
+            z-index: 20;
+            cursor: pointer;
+        }
+        .fbr-item:hover img {
+            transform: scale(1.15);
+            filter: brightness(0.5) blur(1px);
+        }
+        .fbr-item:hover::after { opacity: 1; }
+        .fbr-item:hover .fbr-zoom-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    /* --- LIGHTBOX / OVERLAY --- */
+    #fbr-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: var(--fbr-overlay-bg);
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+        backdrop-filter: blur(15px);
+    }
+
+    #fbr-overlay.active { opacity: 1; pointer-events: all; }
+
+    .fbr-overlay-content {
+        position: relative;
+        width: 90%;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #fbr-current-img {
+        max-width: 1o0%;
+        max-height: 75vh;
+        object-fit: contain;
+        border: 2px solid #444;
+        box-shadow: 0 0 50px rgba(0,0,0,0.9);
+        border-radius: 4px;
+    }
+
+    .fbr-caption {
+        color: #fff;
+        margin: 20px 0;
+        font-family: 'Segoe UI', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+    }
+
+    /* Navigazione Overlay */
+    .fbr-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    .fbr-btn:hover { background: var(--fbr-accent); border-color: var(--fbr-accent); }
+
+    .fbr-close { position: absolute; top: -70px; right: 0; }
+
+    .fbr-nav-container {
+        display: flex;
+        gap: 40px;
+    }
+
+    /* --- RESPONSIVE MOBILE --- */
+    @media (max-width: 768px) {
+        :root { --fbr-height: 200px; }
+        .fbr-item { width: 160px; height: 160px; margin: 0 6px; border-width: 1px; }
+        #fotogallery { padding: 20px 10px !important; }
+        .fbr-btn { width: 50px; height: 50px; }
+        .fbr-close { top: -60px; }
+        #fbr-current-img { max-height: 60vh; }
+        
+        /* Su mobile, zoom discreto al tocco */
+        .fbr-item:active { transform: scale(1.05); }
+    }
+</style>
+
+<div id="fotogallery" style="padding: 40px 20px; text-align: center; color: white; font-family: 'Arial Black', sans-serif; background: #000;">
+    <h2 style="color: #ff4500; text-transform: uppercase; letter-spacing: 3px; margin: 0; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255,69,0,0.3);">FBR Photo Stream</h2>
+    <p style="color: #888; font-size: 0.75rem; margin-top: 8px; font-weight: normal;">HOVER TO ZOOM • SWIPE TO EXPLORE</p>
+</div>
+
+<div id="fbr-gallery-container">
+    <div class="fbr-track" id="fbr-track"></div>
+</div>
+
+<div id="fbr-overlay">
+    <div class="fbr-overlay-content">
+        <button class="fbr-btn fbr-close" id="fbr-close-btn"><i class="fas fa-times"></i></button>
+        <img id="fbr-current-img" src="" alt="FBR">
+        <div class="fbr-caption" id="fbr-caption"></div>
+        <div class="fbr-nav-container">
+            <button class="fbr-btn fbr-prev" id="fbr-prev-btn"><i class="fas fa-arrow-left"></i></button>
+            <button class="fbr-btn fbr-next" id="fbr-next-btn"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    const config = {
+        basePath: 'https://sergioanello-del.github.io/Free_Bikers_Roma_22_febbraio/Gallery/',
+        images: ["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg","15.jpeg","16.jpeg","17.jpeg"],
+        speed: 0.6 // Velocità rallentata (era 1.2)
+    };
+
+    const track = document.getElementById('fbr-track');
+    const container = document.getElementById('fbr-gallery-container');
+    const overlay = document.getElementById('fbr-overlay');
+    const imgElement = document.getElementById('fbr-current-img');
+    
+    let scrollPos = 0;
+    let trackWidth = 0;
+    let isDragging = false;
+    let isHovered = false;
+    let startX = 0;
+    let isClickPrevented = false;
+    let animationId;
+
+    // Rileva se è un dispositivo touch
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    function init() {
+        const content = config.images.map((img, i) => `
+            <div class="fbr-item" data-index="${i}">
+                <i class="fas fa-search-plus fbr-zoom-icon"></i>
+                <img src="${config.basePath}${img}" loading="lazy" alt="FBR Photo">
+            </div>
+        `).join('');
+        
+        track.innerHTML = content + content + content;
+        
+        setTimeout(() => {
+            trackWidth = track.scrollWidth / 3;
+            scrollPos = -trackWidth;
+            updatePosition();
+            animate();
+        }, 800);
+
+        track.addEventListener('click', (e) => {
+            if (isClickPrevented) return;
+            const item = e.target.closest('.fbr-item');
+            if (item) openOverlay(parseInt(item.dataset.index));
+        });
+
+        // STOP ON HOVER (Solo se NON è un dispositivo touch)
+        if (!isTouchDevice) {
+            container.addEventListener('mouseenter', () => isHovered = true);
+            container.addEventListener('mouseleave', () => {
+                isHovered = false;
+                isDragging = false; 
+            });
+        }
+    }
+
+    function animate() {
+        // L'animazione continua se non si sta trascinando e (su desktop) se non c'è l'hover
+        if (!isDragging && !isHovered) {
+            scrollPos -= config.speed;
+            if (scrollPos <= -trackWidth * 2) scrollPos += trackWidth;
+            if (scrollPos > -trackWidth) scrollPos -= trackWidth;
+            updatePosition();
+        }
+        animationId = requestAnimationFrame(animate);
+    }
+
+    function updatePosition() {
+        track.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
+    }
+
+    function handleStart(e) {
+        isDragging = true;
+        isClickPrevented = false;
+        startX = e.pageX || e.touches[0].pageX;
+    }
+
+    function handleMove(e) {
+        if (!isDragging) return;
+        const x = e.pageX || e.touches[0].pageX;
+        const walk = x - startX;
+        if (Math.abs(walk) > 10) isClickPrevented = true;
+        scrollPos += walk;
+        startX = x;
+        updatePosition();
+    }
+
+    container.addEventListener('mousedown', handleStart);
+    container.addEventListener('touchstart', handleStart, {passive: true});
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('touchmove', handleMove, {passive: true});
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('touchend', () => isDragging = false);
+
+    let currentIndex = 0;
+    function openOverlay(index) {
+        currentIndex = index;
+        showImage();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function showImage() {
+        imgElement.style.opacity = '0';
+        const src = config.basePath + config.images[currentIndex];
+        imgElement.src = src;
+        document.getElementById('fbr-caption').innerText = `FBR GALLERY • ${currentIndex + 1} / ${config.images.length}`;
+        imgElement.onload = () => imgElement.style.opacity = '1';
+    }
+
+    document.getElementById('fbr-close-btn').onclick = () => {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    document.getElementById('fbr-next-btn').onclick = (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % config.images.length;
+        showImage();
+    };
+
+    document.getElementById('fbr-prev-btn').onclick = (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + config.images.length) % config.images.length;
+        showImage();
+    };
+
+    overlay.onclick = (e) => {
+        if (e.target === overlay) document.getElementById('fbr-close-btn').click();
+    };
+
+    init();
+})();
+</script>
+
+
+<!-- fine photogallery -->
+
+
+
+
+
+
+<!-- inizio video gallery -->
+
+
+
+<style>
+    :root {
+        --fb-primary: #ff0000;
+        --fb-text: #333;
+        --fb-bg-modal: rgba(0, 0, 0, 0.95);
+        --fb-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .fb-video-section {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 40px 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .fb-gallery-title {
+        text-align: center;
+        color: var(--fb-text);
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 900;
+        animation: fbFadeInDown 0.8s ease-out;
+    }
+
+    /* Grid System */
+    .fb-video-wall {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .fb-video-item {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9; /* Default per la griglia */
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transition: var(--fb-transition);
+        background-color: #000;
+        animation: fbFadeInUp 0.6s forwards;
+    }
+
+    .fb-video-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(255, 0, 0, 0.25);
+    }
+
+    .fb-video-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: transform 0.6s ease;
+    }
+
+    .fb-video-item:hover .fb-video-thumb {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    /* Play Button */
+    .fb-play-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .fb-play-icon {
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--fb-transition);
+    }
+
+    .fb-video-item:hover .fb-play-icon {
+        background: var(--fb-primary);
+        transform: scale(1.1);
+    }
+
+    .fb-play-icon svg {
+        width: 30px;
+        fill: #000;
+        margin-left: 3px;
+    }
+
+    .fb-video-item:hover .fb-play-icon svg {
+        fill: #fff;
+    }
+
+    /* Modal Styling */
+    .fb-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: var(--fb-bg-modal);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        backdrop-filter: blur(10px);
+        padding: 20px;
+
+    }
+
+    .fb-modal-overlay.active { display: flex; }
+
+    .fb-modal-content {
+        position: relative;
+        width: 100%;
+        /* Le dimensioni massime verranno gestite via JS in base al video */
+        background: #000;
+        border-radius: 8px;
+        box-shadow: 0 0 40px rgba(0,0,0,1);
+        transform: scale(0.8);
+        transition: var(--fb-transition);
+    }
+
+    .fb-modal-overlay.active .fb-modal-content { transform: scale(1); }
+
+    .fb-close-btn {
+        position: absolute;
+        top: -45px;
+        right: -10px;
+        color: #fff;
+        font-size: 40px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    #fbPlayerContainer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+
+    #fbPlayerContainer video, #fbPlayerContainer iframe {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: inherit;
+    }
+
+    @keyframes fbFadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fbFadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .fb-close-btn {
+            top: -50px;
+            right: 0;
+        }
+        .fb-video-section { padding: 20px 10px; }
+    }
+</style>
+
+<section class="fb-video-section" id="video-gallery">
+    <h2 class="fb-gallery-title">Video Gallery - Free Bikers Roma</h2>
+    
+    <div class="fb-video-wall">
+        
+        <div class="fb-video-item" 
+             data-video-type="html5" 
+             data-video-url="https://sergioanello-del.github.io/Free_Bikers_Roma_22_febbraio/Video/Video01.mp4" 
+             data-width="300" 
+             data-height="600">
+            <img src="https://sergioanello-del.github.io/Free_Bikers_Roma_1_febbraio/VideoSermoneda/TN-video-01.jpg" alt="Video 1" class="fb-video-thumb">
+            <div class="fb-play-overlay">
+                <div class="fb-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="fb-video-info" style="position:absolute; bottom:10px; left:15px; color:#fff; font-weight:bold; text-shadow:1px 1px 3px #000;">On the Road</div>
+        </div>
+<!-- 
+        <div class="fb-video-item" 
+             data-video-type="html5" 
+             data-video-url="https://sergioanello-del.github.io/Free_Bikers_Roma_1_febbraio/VideoSermoneda/video02.mp4"
+             data-width="1280" 
+             data-height="720">
+            <img src="https://sergioanello-del.github.io/Free_Bikers_Roma_1_febbraio/VideoSermoneda/TN-video-02.jpg" alt="Video 2" class="fb-video-thumb">
+            <div class="fb-play-overlay">
+                <div class="fb-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="fb-video-info" style="position:absolute; bottom:10px; left:15px; color:#fff; font-weight:bold; text-shadow:1px 1px 3px #000;">Esposizione Presepe</div>
+        </div>
+
+        <div class="fb-video-item" 
+             data-video-type="html5" 
+             data-video-url="https://sergioanello-del.github.io/Free_Bikers_Roma_1_febbraio/VideoSermoneda/video04.mp4">
+            <img src="https://sergioanello-del.github.io/Free_Bikers_Roma_1_febbraio/VideoSermoneda/TN-video-04.jpg" alt="Video 4" class="fb-video-thumb">
+            <div class="fb-play-overlay">
+                <div class="fb-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="fb-video-info" style="position:absolute; bottom:10px; left:15px; color:#fff; font-weight:bold; text-shadow:1px 1px 3px #000;">Raduno</div>
+        </div> -->
+
+    </div>
+</section>
+
+<div class="fb-modal-overlay" id="fbVideoModal">
+    <div class="fb-modal-content" id="fbModalContent">
+        <button class="fb-close-btn" id="fbCloseModal">&times;</button>
+        <div id="fbPlayerContainer"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('fbVideoModal');
+        const modalContent = document.getElementById('fbModalContent');
+        const container = document.getElementById('fbPlayerContainer');
+        const closeBtn = document.getElementById('fbCloseModal');
+        const videoItems = document.querySelectorAll('.fb-video-item');
+
+        videoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const type = this.getAttribute('data-video-type');
+                const url = this.getAttribute('data-video-url');
+                const id = this.getAttribute('data-video-id');
+                
+                // Legge larghezza e altezza (default 16:9 se non specificati)
+                const vW = this.getAttribute('data-width') || 1280;
+                const vH = this.getAttribute('data-height') || 720;
+                const aspect = vW / vH;
+
+                // Applica le dimensioni al modal content
+                // Su desktop non supera i 1000px di larghezza o l'80% dell'altezza schermo
+                modalContent.style.maxWidth = vW + 'px';
+                modalContent.style.aspectRatio = aspect;
+
+                let playerHtml = '';
+                if (type === 'youtube') {
+                    playerHtml = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay" allowfullscreen></iframe>`;
+                } else if (type === 'html5') {
+                    playerHtml = `<video controls autoplay playsinline><source src="${url}" type="video/mp4"></video>`;
+                }
+
+                container.innerHTML = playerHtml;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            setTimeout(() => { container.innerHTML = ''; }, 400);
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+    });
+</script>
+
+
+
+
+<!-- fine video gallery -->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
