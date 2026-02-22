@@ -702,6 +702,8 @@
         /* Su mobile, zoom discreto al tocco */
         .fbr-item:active { transform: scale(1.05); }
     }
+
+
 </style>
 
 <div id="fotogallery" style="padding: 40px 20px; text-align: center; color: white; font-family: 'Arial Black', sans-serif; background: #000;">
@@ -1041,12 +1043,33 @@
         }
         .fb-video-section { padding: 20px 10px; }
     }
+
+
 </style>
+<style>
+/* Forza il contenitore della galleria a centrare tutto il contenuto */
+.video-gallery-container, .video-gallery {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column; /* Mantiene il titolo sopra e il video sotto */
+    text-align: center;
+    width: 100%;
+}
+
+/* Forza l'elemento video/immagine a stare al centro */
+.video-gallery img, .video-gallery video, .video-item {
+    display: block !important;
+    margin: 0 auto !important; /* Centratura orizzontale classica */
+    max-width: 100%;
+}
+</style>
+
 
 <section class="fb-video-section" id="video-gallery">
     <h2 class="fb-gallery-title">Video Gallery - Free Bikers Roma</h2>
     
-    <div class="fb-video-wall">
+    <div class="fb-video-wall video-gallery-container">
         
         <div class="fb-video-item" 
              data-video-type="html5" 
